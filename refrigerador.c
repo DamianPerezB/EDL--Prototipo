@@ -3,40 +3,82 @@
 #include <stdlib.h>
 #include <string.h>
 
+//printf("%04d\n", x);
 
 Producto *agregar_Producto (int TIPO){
     Producto *aux = (Producto*)malloc(sizeof(Producto));
+    int option = 0, bandera = 1;
     switch (TIPO){
         case 1:
-            strcpy(aux->tipoAlimento,"Bebidas");
+            strcpy(aux->tipoAlimento,"Bebida");
             break;
         case 2:
-            strcpy(aux->tipoAlimento,"Embutidos");
+            strcpy(aux->tipoAlimento,"Embutido");
             break;
         case 3:
-            strcpy(aux->tipoAlimento,"Frutas");
+            strcpy(aux->tipoAlimento,"Fruta");
             break;
         case 4:
-            strcpy(aux->tipoAlimento,"Lacteos");
+            strcpy(aux->tipoAlimento,"Lacteo");
             break;
         case 5:
-            strcpy(aux->tipoAlimento,"Carnes");
+            strcpy(aux->tipoAlimento,"Carne");
             break;
         default:
-            strcpy(aux->tipoAlimento,"Verduras");
+            strcpy(aux->tipoAlimento,"Verdura");
             break;
     }
-    char NOMBREALIMENTO[12];
-    int PRECIO, ANIOCOMP, MESCOMP, DIACOMP, ANIOCAD, MESCAD, DIACAD;
-    strcpy(aux->nombreAlimento,NOMBREALIMENTO);
-    aux->precio = PRECIO;
-    aux->anioCompra = ANIOCOMP;
-    aux->mesCompra = MESCOMP;
-    aux->diaCompra = DIACOMP;
-    aux->anioCaducidad = ANIOCAD;
-    aux->mesCaducidad = MESCAD;
-    aux->diaCaducicad = DIACAD;
-    aux->disponibilidad = 1;
+    printf("\n Ingresa el nombre del producto: ");
+    scanf("%s",&aux->nombreAlimento);
+    printf("\n Ingresa su precio: $");
+    scanf("%f",&aux->precio);
+    printf("\n Dia de compra (en numero): ");
+    scanf("%d",&aux->diaCompra);
+    printf("\n Mes de compra (en numero): ");
+    scanf("%d",&aux->mesCompra);
+    printf("\n Anio de compra (en numero): ");
+    scanf("%d",&aux->anioCompra);
+    do{
+        printf("\n Tu protucto tiene una fecha de caducidad especifica?");
+        printf("\n Ingresa el numero");
+        printf("\n 1) Si\t2) No\nOpcion: ");
+        scanf("%d",&option);
+        switch (option){
+        case 1:
+            printf("\n Dia de caducidad (en numero): ");
+            scanf("%d",&aux->diaCaducicad);
+            printf("\n Mes de caducidad (en numero): ");
+            scanf("%d",&aux->mesCaducidad);
+            printf("\n Anio de caducidad (en numero): ");
+            scanf("%d",&aux->anioCaducidad);
+            bandera = 0;
+            break;
+        case 2:
+            aux->diaCaducicad = 0;
+            aux->mesCaducidad = 0;
+            aux->anioCaducidad = 0;
+            bandera = 0;
+            break;
+        default:
+            printf("\nIngresa un numero valido\n");
+            break;
+        }
+    }while(bandera != 0);
+    printf("\n Tiene disponibilidad?");
+    printf("\n Ingresa el numero");
+    printf("\n 1) Si\t2) No\nOpcion: ");
+    scanf("%d",&option);
+    if(option == 1)
+        aux->disponibilidad = 1;
+    else    
+        aux->disponibilidad = 0;
+    printf("\nProducto: %s",aux->tipoAlimento);;
+    printf("\nNombre: %s",aux->nombreAlimento);
+    printf("\nPrecio: $%.2f",aux->precio);
+    printf("\nFecha de compra: %02d/%02d/%d",aux->diaCompra,aux->mesCompra,aux->anioCompra);
+    printf("\nFecha caducidad: %02d/%02d/%04d",aux->diaCaducicad,aux->mesCaducidad,aux->anioCaducidad);
+    printf("\nDisponibilidad: %d", aux->disponibilidad);
+    return (aux);
 }
 
 Nodo *crear_Nodo (Producto *producto){
