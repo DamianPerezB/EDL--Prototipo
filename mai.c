@@ -1,3 +1,6 @@
+//  Perez Benitez Damian    
+//  Carbajal Urquisa Luis Fhernando
+
 #include "refrigerador.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,11 +16,11 @@ int main (){
     lacteo = crear_ListaSimple();
     carne = crear_ListaSimple();
     verdura = crear_ListaSimple();
-    Nodo *ele1, *ele2;
+    Nodo *ele1;
 
     while(option !=7){
         printf("\nREFRIGERADOR ABIERTO\n");
-        printf("Selecciona el apartado de tu preferencia\n");
+        printf("Selecciona el apartado de tu preferencia");
         printf("\n1- Bebidas");
         printf("\n2- Embutidos");
         printf("\n3- Frutas");
@@ -31,7 +34,7 @@ int main (){
             case 1:
                 do{
                     printf("\nSeccion de bebidas");
-                    printf("Selecciona la operacion deseada");
+                    printf("\nSelecciona la operacion deseada");
                     printf("\n1- Ingresar una bebida");
                     printf("\n2- Quitar una bebida");
                     printf("\n3- Mostrar la lista de bebidas");
@@ -41,13 +44,35 @@ int main (){
                     printf("\n7- Regresar al menu principal");
                     printf("\n   Opcion:\t"); 
                     scanf("%d",&option2);  
-                    ele1=crear_Nodo(agregar_Producto(option));
+                    switch (option2){
+                        case 1:
+                            ele1 = crear_Nodo(agregar_Producto(option));
+                            insertar_cabeza(bebida,ele1);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            imprimir_Lista(bebida);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            vaciar_Lista(bebida);
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            printf("\nIngresa una opcion valida\n");
+                            break;
+                    }
                 }while(option2 !=7);
                 break;
             case 2:
                 do{
                     printf("\nSeccion de embutidos");
-                    printf("Selecciona la operacion deseada");
+                    printf("\nSelecciona la operacion deseada");
                     printf("\n1- Ingresar un embutido");
                     printf("\n2- Quitar un embutido");
                     printf("\n3- Mostrar la lista de embutidos");
@@ -57,12 +82,35 @@ int main (){
                     printf("\n7- Regresar al menu principal");
                     printf("\n   Opcion:\t"); 
                     scanf("%d",&option2); 
+                    switch (option2){
+                        case 1:
+                            ele1 = crear_Nodo(agregar_Producto(option));
+                            insertar_cabeza(embutido,ele1);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            imprimir_Lista(embutido);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            vaciar_Lista(embutido);
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            printf("\nIngresa una opcion valida\n");
+                            break;
+                    }
                 }while(option2 !=7);
                 break;
             case 3:
                 do{
                     printf("\nSeccion de frutas");
-                    printf("Selecciona la operacion deseada");
+                    printf("\nSelecciona la operacion deseada");
                     printf("\n1- Ingresar una fruta");
                     printf("\n2- Quitar una fruta");
                     printf("\n3- Mostrar la lista de frutas");
@@ -72,12 +120,35 @@ int main (){
                     printf("\n7- Regresar al menu principal");
                     printf("\n   Opcion:\t"); 
                     scanf("%d",&option2); 
+                    switch (option2){
+                        case 1:
+                            ele1 = crear_Nodo(agregar_Producto(option));
+                            insertar_cabeza(fruta,ele1);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            imprimir_Lista(fruta);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            vaciar_Lista(fruta);
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            printf("\nIngresa una opcion valida\n");
+                            break;
+                    }
                 }while(option2 !=7);
                 break;
             case 4:
                 do{
                     printf("\nSeccion de lacteos");
-                    printf("Selecciona la operacion deseada");
+                    printf("\nSelecciona la operacion deseada");
                     printf("\n1- Ingresar un lateo");
                     printf("\n2- Quitar un lacteo");
                     printf("\n3- Mostrar la lista de lacteos");
@@ -87,12 +158,35 @@ int main (){
                     printf("\n7- Regresar al menu principal");
                     printf("\n   Opcion:\t"); 
                     scanf("%d",&option2); 
+                    switch (option2){
+                        case 1:
+                            ele1 = crear_Nodo(agregar_Producto(option));
+                            insertar_cabeza(lacteo,ele1);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            imprimir_Lista(lacteo);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            vaciar_Lista(lacteo);
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            printf("\nIngresa una opcion valida\n");
+                            break;
+                    }
                 }while(option2 !=7);
                 break;
             case 5:
                 do{
                     printf("\nSeccion de proteinas");
-                    printf("Selecciona la operacion deseada");
+                    printf("\nSelecciona la operacion deseada");
                     printf("\n1- Ingresar una proteina");
                     printf("\n2- Quitar una proteina");
                     printf("\n3- Mostrar la lista de proteinas");
@@ -101,13 +195,36 @@ int main (){
                     printf("\n6- Vaciar lista de proteinas");
                     printf("\n7- Regresar al menu principal");
                     printf("\n   Opcion:\t"); 
-                    scanf("%d",&option2); 
+                    scanf("%d",&option2);
+                    switch (option2){
+                        case 1:
+                            ele1 = crear_Nodo(agregar_Producto(option));
+                            insertar_cabeza(carne,ele1);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            imprimir_Lista(carne);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            vaciar_Lista(carne);
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            printf("\nIngresa una opcion valida\n");
+                            break;
+                    } 
                 }while(option2 !=7);
                 break;
             case 6:
                 do{
                     printf("\nSeccion de verduras");
-                    printf("Selecciona la operacion deseada");
+                    printf("\nSelecciona la operacion deseada");
                     printf("\n1- Ingresar una verdura");
                     printf("\n2- Quitar una verdura");
                     printf("\n3- Mostrar la lista de verduras");
@@ -116,7 +233,30 @@ int main (){
                     printf("\n6- Vaciar lista de verduras");
                     printf("\n7- Regresar al menu principal");
                     printf("\n   Opcion:\t"); 
-                    scanf("%d",&option2); 
+                    scanf("%d",&option2);
+                    switch (option2){
+                        case 1:
+                            ele1 = crear_Nodo(agregar_Producto(option));
+                            insertar_cabeza(verdura,ele1);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            imprimir_Lista(verdura);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            vaciar_Lista(verdura);
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            printf("\nIngresa una opcion valida\n");
+                            break;
+                    } 
                 }while(option2 !=7);
                 break;
             case 7:
