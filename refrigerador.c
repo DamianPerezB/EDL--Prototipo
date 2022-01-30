@@ -1,9 +1,10 @@
+//  Perez Benitez Damian    
+//  Carbajal Urquisa Luis Fhernando
+
 #include "refrigerador.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-//printf("%04d\n", x);
 
 Producto *agregar_Producto (int TIPO){
     Producto *aux = (Producto*)malloc(sizeof(Producto));
@@ -28,7 +29,7 @@ Producto *agregar_Producto (int TIPO){
             strcpy(aux->tipoAlimento,"Verdura");
             break;
     }
-    printf("\n Ingresa el nombre del producto: ");
+    printf("\n Ingresa el nombre del producto (usa guiones bajos en vez de espacios): ");
     scanf("%s",&aux->nombreAlimento);
     printf("\n Ingresa su precio: $");
     scanf("%f",&aux->precio);
@@ -72,12 +73,6 @@ Producto *agregar_Producto (int TIPO){
         aux->disponibilidad = 1;
     else    
         aux->disponibilidad = 0;
-    printf("\nProducto: %s",aux->tipoAlimento);;
-    printf("\nNombre: %s",aux->nombreAlimento);
-    printf("\nPrecio: $%.2f",aux->precio);
-    printf("\nFecha de compra: %02d/%02d/%d",aux->diaCompra,aux->mesCompra,aux->anioCompra);
-    printf("\nFecha caducidad: %02d/%02d/%04d",aux->diaCaducicad,aux->mesCaducidad,aux->anioCaducidad);
-    printf("\nDisponibilidad: %d", aux->disponibilidad);
     return (aux);
 }
 
@@ -116,9 +111,48 @@ void insertar_cabeza (ListaSimple *lista, Nodo *aux){
 
 void insertar_cola (ListaSimple *lista, Nodo *aux);
 void insertar_en_medio (ListaSimple *lista, Nodo *anterior, Nodo *elemento);
-void quitar_cabeza (ListaSimple *lista);
+
+void quitar_cabeza (ListaSimple *lista){
+    Nodo *aux = NULL;   
+    if(!lista_vacia(*lista)){
+        aux = lista->cabeza;
+        lista->cabeza = lista->cabeza->sig;
+        free(aux);
+    } 
+}
+
 void quitar_cola (ListaSimple *lista);
 void quitar_en_medio (ListaSimple *lista, Nodo *elemento);
 Nodo *buscar_Elemento (ListaSimple *lista, Nodo *elemento);
-void vaciar_Lista (ListaSimple *lista);
-void imprimir_Lista (ListaSimple *lista);
+
+void vaciar_Lista (ListaSimple *lista){
+    Nodo *aux = lista->cabeza;
+    if(lista_vacia(*lista) != 1){
+        while (aux != NULL){
+            aux = aux->sig;
+            quitar_cabeza(lista);
+        }
+    }
+    else
+        printf("\nLista vacia\n");
+    free(aux);
+}
+
+void imprimir_Lista (ListaSimple *lista){
+    Nodo *aux = lista->cabeza;
+    Producto *product;
+    if (lista_vacia(*lista) != 1){
+        while (aux != NULL){
+            product = aux->datos;
+            printf ("\nNombre: %s",product->nombreAlimento);
+            printf("\n Tipo: %s",product->tipoAlimento);
+            printf("\n Precio: $%.2f",product->precio);
+            printf("\n Fecha de compra: %02d/%02d/%d",product->diaCompra,product->mesCompra,product->anioCompra);
+            printf("\n Fecha caducidad: %02d/%02d/%04d",product->diaCaducicad,product->mesCaducidad,product->anioCaducidad);
+            printf("\n Disponibilidad: %d\n", product->disponibilidad);
+            aux = aux->sig;
+        }
+    }
+    else
+        printf("\nLista vacia\n");
+}
