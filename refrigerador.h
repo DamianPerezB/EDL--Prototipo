@@ -13,11 +13,11 @@ typedef struct Producto{
     int mesCaducidad;
     int diaCaducicad;
     int disponibilidad;
-    int identificador;
 }Producto;
 
 typedef struct Nodo{
     Producto *datos;
+    int identificador;
     struct Nodo *sig;
 }Nodo;
 
@@ -26,10 +26,10 @@ typedef struct ListaSimple{
 }ListaSimple;
 
 //Funciones para generar las listas
-Producto *agregar_Producto (int TIPO, int ID);
+Producto *agregar_Producto (int TIPO);
 Producto *agregar_Producto_temporal(float elemento);
 void copiar_Producto(Nodo *aux, Nodo *aux2);
-Nodo *crear_Nodo (Producto *producto);
+Nodo *crear_Nodo (Producto *producto, int ID);
 ListaSimple *crear_ListaSimple ();
 
 //Funciones para editar las listas
@@ -50,3 +50,4 @@ ListaSimple *QuickSort (ListaSimple *lista, int inicio, int final);
 ListaSimple *Mergesort (ListaSimple *lista, int inicio, int final);
 void mezcla (ListaSimple *lista, int izquierda, int central, int derecha);
 void *ordenamiento_seleccion(ListaSimple *lista, int n);
+void ordenamiento_inserccion(ListaSimple *lista, int n);
