@@ -6,10 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-Producto *agregar_Producto (int TIPO, int ID){
+Producto *agregar_Producto (int TIPO){
     Producto *aux = (Producto*)malloc(sizeof(Producto));
     //int option = 0, bandera = 1;
-    aux->identificador = ID;
     /*switch (TIPO){
         case 1:
             strcpy(aux->tipoAlimento,"Bebida");
@@ -96,9 +95,10 @@ Producto *agregar_Producto_temporal(float elemento){
     return (aux);
 }
 
-Nodo *crear_Nodo (Producto *producto){
+Nodo *crear_Nodo (Producto *producto, int ID){
     Nodo *aux = (Nodo*)malloc(sizeof(Producto));
     aux->datos = producto;
+    aux->identificador = ID;
     aux->sig = NULL;
 }
 
@@ -206,10 +206,10 @@ ListaSimple *buscar_Elemento_Recursivo_2 (ListaSimple *lista, ListaSimple *lista
         else{
             central = (inferior + superior)/2;
             aux = lista->cabeza;
-            while (aux->datos->identificador != central){
+            while (aux->identificador != central){
                 aux = aux->sig;
             }
-            printf("\nCentral = %d  id=%d",central,aux->datos->identificador);
+            printf("\nCentral = %d  id=%d",central,aux->identificador);
             printf("\nSi %f = %f se agrega a lista",aux->datos->precio,elemento->datos->precio);
             printf("\nSi %f < %f return 1",aux->datos->precio,elemento->datos->precio);
             printf("\nSi %f > %f return 2",aux->datos->precio,elemento->datos->precio);
@@ -263,7 +263,7 @@ void imprimir_Lista (ListaSimple *lista){
             /*printf("\n Fecha de compra: %02d/%02d/%d",product->diaCompra,product->mesCompra,product->anioCompra);
             printf("\n Fecha caducidad: %02d/%02d/%04d",product->diaCaducicad,product->mesCaducidad,product->anioCaducidad);
             printf("\n Disponibilidad: %d\n", product->disponibilidad);*/
-            printf("\n ID: %d",product->identificador);
+            printf("\n ID: %d",aux->identificador);
             aux = aux->sig;
         }
     }
@@ -274,15 +274,15 @@ void imprimir_Lista (ListaSimple *lista){
 ListaSimple *QuickSort (ListaSimple *lista, int inicio, int final){
     int izquierda, derecha, centro, idTemporal;
     float auxPrecio = 0;
-    Nodo *pivote = crear_Nodo(agregar_Producto_temporal(auxPrecio));
+    Nodo *pivote = crear_Nodo(agregar_Producto_temporal(auxPrecio),inicio);
     Nodo *aux = lista->cabeza;
     Nodo *aux2 = lista->cabeza;
     if (lista_vacia(*lista) != 1) {
         if (inicio < final){
-            while (aux->datos->identificador != inicio){
+            while (aux->identificador != inicio){
                 printf("\n255) Sale cuando id sea %d",inicio);
                 aux = aux->sig;
-                printf("\naux id: %d",aux->datos->identificador);
+                printf("\naux id: %d",aux->identificador);
             }
             pivote->datos = aux->datos;
             izquierda = inicio;
@@ -290,64 +290,64 @@ ListaSimple *QuickSort (ListaSimple *lista, int inicio, int final){
             while (izquierda < derecha){
                 printf("\n263) Entre aca");
                 aux = lista->cabeza;
-                printf("\n2aux id: %d",aux->datos->identificador);
-                while (aux->datos->identificador != derecha){
+                printf("\n2aux id: %d",aux->identificador);
+                while (aux->identificador != derecha){
                     printf("\n267) Sale cuando id sea %d",derecha);
                     aux = aux->sig;
-                    printf("\naux id: %d",aux->datos->identificador);
+                    printf("\naux id: %d",aux->identificador);
                 }
                 printf("\nSali 267");
                 while ((derecha > izquierda) && (aux->datos->precio > pivote->datos->precio)){
                     derecha--;
-                    while (aux->datos->identificador != derecha){
+                    while (aux->identificador != derecha){
                         printf("\nSale cuando id sea %d",derecha);
                         aux = aux->sig;
-                        printf("\naux id: %d",aux->datos->identificador);
+                        printf("\naux id: %d",aux->identificador);
                     }
                 }
                 if (derecha > izquierda){
-                    while (aux2->datos->identificador != derecha){
+                    while (aux2->identificador != derecha){
                         aux2 = aux2->sig;
                     }
                     aux = lista->cabeza;
-                    while (aux->datos->identificador != izquierda){
+                    while (aux->identificador != izquierda){
                         aux = aux->sig;
                     }
-                    idTemporal = aux->datos->identificador;
+                    idTemporal = aux->identificador;
                     aux->datos = aux2->datos;
-                    aux->datos->identificador = idTemporal;
+                    aux->identificador = idTemporal;
                     izquierda++;
                 }
-                while (aux->datos->identificador != izquierda){
+                while (aux->identificador != izquierda){
                     aux = aux->sig;
                 }
                 while ((izquierda < derecha) && (aux->datos->precio < pivote->datos->precio)){
                     izquierda++;
-                    while (aux->datos->identificador != izquierda){
+                    while (aux->identificador != izquierda){
                         aux = aux->sig;
                     }
                 }
                 if (izquierda < derecha){
                     aux = lista->cabeza;
-                    while (aux->datos->identificador != izquierda){
+                    while (aux->identificador != izquierda){
                         aux = aux->sig;
                     }
                     aux2 = lista->cabeza;
-                    while (aux2->datos->identificador != derecha){
+                    while (aux2->identificador != derecha){
                         aux2 = aux2->sig;
                     }
-                    idTemporal = aux2->datos->identificador;
+                    idTemporal = aux2->identificador;
                     aux2->datos = aux->datos;
-                    aux2->datos->identificador = idTemporal;
+                    aux2->identificador = idTemporal;
                     derecha--;
                 }
             }
-            while (aux->datos->identificador != derecha){
+            while (aux->identificador != derecha){
                 aux = aux->sig;
             }
-            idTemporal = aux->datos->identificador;
+            idTemporal = aux->identificador;
             aux->datos = pivote->datos;
-            aux->datos->identificador = idTemporal;
+            aux->identificador = idTemporal;
             centro = derecha;
             QuickSort(lista, inicio, centro-1);
             QuickSort(lista, centro+1, final);
@@ -374,43 +374,176 @@ void mezcla (ListaSimple *lista, int izquierda, int central, int derecha){
 }
 
 void *ordenamiento_seleccion(ListaSimple *lista, int n){
-    int indiceMenor, i, j;
-    int auxid1, auxid2;
     Nodo *aux = lista->cabeza;
     Nodo *aux2 = lista->cabeza;
-    for (i=0; i<n-1;i++){
-        indiceMenor = i;
-        for(j=i+1; j<n; j++){
-            aux = lista->cabeza;
-            while(aux->datos->identificador != j){
-                aux = aux->sig;
-            } //aux[j]
-            aux2 = lista->cabeza;
-            while(aux2->datos->identificador != indiceMenor){
-                aux2 = aux2->sig;
-            }
-            //aux2 [indMenor]
-            if(aux->datos->precio < aux2->datos->precio){
-                indiceMenor = j;
+    Nodo *temp = crear_Nodo(agregar_Producto_temporal(0),0);
+    int indiceMenor, i, j;
+    if (lista_vacia(*lista) != 1) {
+        for(i=0; i<n-1; i++){
+            indiceMenor = i;
+            for(j=i+1; j<n; j++){
+                aux = lista->cabeza;
+                while(aux->identificador != j){
+                    aux=aux->sig;
+                }
+                aux2 = lista->cabeza;
+                while(aux->identificador != indiceMenor){
+                    aux2 = aux2->sig;
+                }
+                if (aux->datos->precio < aux2->datos->precio){
+                    indiceMenor = j;
+                }
+                if (i != indiceMenor){
+                    aux = lista->cabeza;
+                    while(aux->identificador != i){
+                        aux=aux->sig;
+                    }
+                    copiar_Producto(aux,temp);
+                    aux2 = lista->cabeza;
+                    while(aux2->identificador != indiceMenor){
+                        aux2=aux2->sig;
+                    }
+                    copiar_Producto(aux2,aux);
+                    copiar_Producto(temp,aux2);
+                }
+                imprimir_Lista(lista);
             }
         }
-        if (i != indiceMenor){
-            aux = lista->cabeza;
-            while(aux->datos->identificador != i){
-                aux = aux->sig;
-            }   //a[i]
-            Nodo *aux3;
-            copiar_Producto(aux,aux3); //aux = a[i];
-            aux3->datos->identificador = aux->datos->identificador;
-            aux2 = lista->cabeza;
-            while (aux2->datos->identificador != indiceMenor){ 
-                aux2 = aux2->sig;
-            }   //aux2[indiceMenor]
-            copiar_Producto(aux2,aux); //aux[i] = aux[indMenor]
-            //aux2 = aux3;
-            copiar_Producto(aux3,aux2); //aux[indMenor] = aux
+    }
+    else{ }
+}
+
+/*void *ordenamiento_inserccion(ListaSimple *lista, int n){   
+    int i,j;
+    Nodo *aux = lista->cabeza;
+    Nodo *aux2 = lista->cabeza;
+    Nodo *temp = crear_Nodo(agregar_Producto_temporal(0),0);
+    for (i = 1; i < n; i++){
+        j = i;
+        aux = lista->cabeza;
+        while (aux->identificador != i){
+            aux = aux->sig;
         }
-        printf("\nOrdenado es\n");
-        imprimir_Lista(lista);
+        copiar_Producto(temp,aux);
+        bucle:
+        aux2 = lista->cabeza;
+        while (aux2->identificador != j-1){
+            aux2 = aux2->sig;
+        }
+        while(j > 0 && temp->datos->precio < aux2->datos->precio ){
+            aux = lista->cabeza;
+            while (aux->identificador != j){
+                aux = aux->sig;
+            }
+            copiar_Producto(aux2,aux);
+            j--;
+            goto bucle;
+        }
+        aux = lista->cabeza;
+        while (aux->identificador != j){
+            aux = aux->sig;
+        }
+        copiar_Producto(temp,aux);
+    }
+}*/
+
+/*void ordenamiento_inserccion(ListaSimple *lista, int n){
+    int i, j;
+    int z, aux;
+    for (i = 1; i < n; i++){
+        j = i;
+        aux= a[i];
+        while(j > 0 && aux < a[j-1]){
+            a[j] = a[j-1];
+            j = j-1;
+        }
+        a[j] = aux;
+        for (z =0; z< n; z++){
+            printf("\nPosicion [%d] = %d",z,a[z]);
+        }
+        printf("\n\n");
+    }
+}*/
+
+/*void ordenamiento_inserccion(ListaSimple *lista, int n){
+    int i, j, z;
+    int k;
+    Nodo *aux1 = lista->cabeza;
+    Nodo *aux2 = lista->cabeza;
+    Nodo *aux3 = lista->cabeza;
+    
+    for (i = 1; i < n; i++){
+        j = i;
+        aux1 = lista->cabeza;
+        for(k=0; k<i; k++){
+            aux1 = aux1->sig;
+        }   //a[i];
+        aux2 = lista->cabeza;
+        for(k=0; k<j-1; k++){
+            aux2 = aux2->sig;
+        }   //a[j-1]
+        while(j > 0 && aux1->datos->precio < aux2->datos->precio){
+            for(k=0; k<=j; k++){
+                aux3 = aux3->sig;
+            }   //a[j]
+            //a[j] = a[j-1];
+            printf("\nEstoy por morir");
+            copiar_Producto(aux2,aux3);
+            j = j-1;
+        }
+        //a[j] = aux;
+        printf("\nSobrevivi");
+        copiar_Producto(aux1,aux3);
+        printf("\nSobrevivi x2");
+    }
+}*/
+
+void ordenamiento_inserccion(ListaSimple *lista, int n){
+    int i, j, z;
+    int k;
+    Nodo *aux1 = lista->cabeza;
+    Nodo *aux2 = lista->cabeza;
+    Nodo *aux3 = lista->cabeza;
+    Nodo *auxtemp = lista->cabeza;
+    Nodo *auxtemp2 = lista->cabeza;
+    //Nodo *aux = crear_Nodo(agregar_Producto(0),0);
+    printf("\nID: %d   precio: %f",auxtemp->identificador, auxtemp->datos->precio);
+    for (i = 1; i < n; i++){
+        j = i;
+        aux1 = lista->cabeza;
+        printf("\nID: %d   precio: %f",auxtemp->identificador, auxtemp->datos->precio);
+        for(k=0; k<i; k++){
+            aux1 = aux1->sig;
+        }   //a[i];
+        auxtemp->datos = aux1->datos;
+        aux2 = lista->cabeza;
+        printf("\nID: %d   precio: %f",auxtemp->identificador, auxtemp->datos->precio);
+        for(k=0; k<j-1; k++){
+            aux2 = aux2->sig;
+        }   //a[j-1]
+        while(j > 0 && aux1->datos->precio < aux2->datos->precio){
+            aux3 = lista->cabeza;
+            
+            for(k=0; k<=j; k++){
+                aux3 = aux3->sig;
+            }   //a[j]
+            aux2 = lista->cabeza;
+            for(k=0; k<j-1; k++){
+                aux2 = aux2->sig;
+            }   //a[j-1]
+            //a[j] = a[j-1];
+            printf("\nEstoy por morir");
+            auxtemp->datos = aux3->datos;
+            aux2->datos = auxtemp->datos;
+            j = j-1;
+        }
+        aux3 = lista->cabeza;
+        for(k=0; k<=j; k++){
+            aux3 = aux3->sig;
+        }   //a[j]
+        //a[j] = aux;
+        printf("\nSobrevivi");
+        aux3->datos = auxtemp->datos;
+        printf("\nSobrevivi x2");
     }
 }
