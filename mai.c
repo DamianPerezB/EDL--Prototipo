@@ -49,7 +49,7 @@ int main (){
                     scanf("%d",&option2);  
                     switch (option2){
                         case 1:
-                            ele1 = crear_Nodo(agregar_Producto(option,idBebida));
+                            ele1 = crear_Nodo(agregar_Producto(option),idBebida);
                             insertar_cabeza(bebida,ele1);
                             idBebida++;
                             break;
@@ -63,7 +63,7 @@ int main (){
                             float elemento = 0;
                             printf("\nIngresa el precio:\t$");
                             scanf("%f",&elemento);
-                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento));
+                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento),idBebida);
                             bebida = QuickSort(bebida, inferior, idBebida);
                             listaTemporal = buscar_Elemento_Recursivo_2(bebida, listaTemporal, inferior, idBebida, ele1);
                             imprimir_Lista(listaTemporal);
@@ -104,7 +104,7 @@ int main (){
                     scanf("%d",&option2); 
                     switch (option2){
                         case 1:
-                            ele1 = crear_Nodo(agregar_Producto(option,idEmbutido));
+                            ele1 = crear_Nodo(agregar_Producto(option),idEmbutido);
                             insertar_cabeza(embutido,ele1);
                             idEmbutido++;
                             break;
@@ -114,17 +114,18 @@ int main (){
                             imprimir_Lista(embutido);
                             break;
                         case 4:
-                            listaTemporal =  crear_ListaSimple();
+                            /*listaTemporal =  crear_ListaSimple();
                             float elemento = 0;
                             printf("\nIngresa el precio:\t$");
                             scanf("%f",&elemento);
-                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento));
+                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento),idEmbutido);
                             listaTemporal = buscar_Elemento_Recursivo_2(embutido, listaTemporal, inferior, idEmbutido, ele1);
                             imprimir_Lista(listaTemporal);
-                            vaciar_Lista(listaTemporal);
+                            vaciar_Lista(listaTemporal);*/
                             break;
                         case 5:
-                            ordenamiento_seleccion(embutido,idEmbutido);
+                            //ordenamiento_seleccion(embutido,idEmbutido);
+                            ordenamiento_inserccion(embutido,idEmbutido);
                             break;
                         case 6:
                             vaciar_Lista(embutido);
@@ -153,7 +154,7 @@ int main (){
                     scanf("%d",&option2); 
                     switch (option2){
                         case 1:
-                            ele1 = crear_Nodo(agregar_Producto(option,idFruta));
+                            ele1 = crear_Nodo(agregar_Producto(option),idFruta);
                             insertar_cabeza(fruta,ele1);
                             idFruta++;
                             break;
@@ -167,7 +168,7 @@ int main (){
                             float elemento = 0;
                             printf("\nIngresa el precio:\t$");
                             scanf("%f",&elemento);
-                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento));
+                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento),idFruta);
                             listaTemporal = buscar_Elemento_Recursivo_2(fruta, listaTemporal, inferior, idFruta, ele1);
                             imprimir_Lista(listaTemporal);
                             vaciar_Lista(listaTemporal);
@@ -201,7 +202,7 @@ int main (){
                     scanf("%d",&option2); 
                     switch (option2){
                         case 1:
-                            ele1 = crear_Nodo(agregar_Producto(option,idLacteo));
+                            ele1 = crear_Nodo(agregar_Producto(option),idLacteo);
                             insertar_cabeza(lacteo,ele1);
                             idLacteo++;
                             break;
@@ -215,7 +216,7 @@ int main (){
                             float elemento = 0;
                             printf("\nIngresa el precio:\t$");
                             scanf("%f",&elemento);
-                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento));
+                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento),idLacteo);
                             auxiliarFinal = idLacteo--;
                             printf("\nDesordenado:\n");
                             imprimir_Lista(lacteo);
@@ -254,7 +255,7 @@ int main (){
                     scanf("%d",&option2);
                     switch (option2){
                         case 1:
-                            ele1 = crear_Nodo(agregar_Producto(option,idCarne));
+                            ele1 = crear_Nodo(agregar_Producto(option),idCarne);
                             insertar_cabeza(carne,ele1);
                             idCarne++;
                             break;
@@ -268,7 +269,7 @@ int main (){
                             float elemento = 0;
                             printf("\nIngresa el precio:\t$");
                             scanf("%f",&elemento);
-                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento));
+                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento),idCarne);
                             listaTemporal = buscar_Elemento_Recursivo_2(carne, listaTemporal, inferior, idCarne, ele1);
                             imprimir_Lista(listaTemporal);
                             vaciar_Lista(listaTemporal);
@@ -302,7 +303,7 @@ int main (){
                     scanf("%d",&option2);
                     switch (option2){
                         case 1:
-                            ele1 = crear_Nodo(agregar_Producto(option,idVerdura));
+                            ele1 = crear_Nodo(agregar_Producto(option),idVerdura);
                             insertar_cabeza(verdura,ele1);
                             idVerdura++;
                             break;
@@ -316,7 +317,7 @@ int main (){
                             float elemento = 0;
                             printf("\nIngresa el precio:\t$");
                             scanf("%f",&elemento);
-                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento));
+                            ele1 = crear_Nodo(agregar_Producto_temporal(elemento),idVerdura);
                             listaTemporal = buscar_Elemento_Recursivo_2(verdura, listaTemporal, inferior, idVerdura, ele1);
                             imprimir_Lista(listaTemporal);
                             vaciar_Lista(listaTemporal);
