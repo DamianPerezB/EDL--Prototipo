@@ -1,5 +1,9 @@
-//  Perez Benitez Damian    
+//  Perez Benitez Damian    2183034588
 //  Carbajal Urquisa Luis Fhernando
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 //Estruturas
 typedef struct Producto{
@@ -48,3 +52,8 @@ void QuickSort (ListaSimple *lista, int inicio, int final);
 void *ordenamiento_seleccion(ListaSimple *lista, int n);
 Nodo* Identificador(ListaSimple *lista, int identificador);
 void Intercambiar(Nodo *a, Nodo *b);
+int eliminar_producto(ListaSimple *lista, int n);
+void acomodar_Id(ListaSimple *lista, int n);
+
+//Funcion para archivo (Opcional)
+void llenar_txt(FILE *p, ListaSimple *lista);
