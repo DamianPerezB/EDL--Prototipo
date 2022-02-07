@@ -1,4 +1,4 @@
-//  Perez Benitez Damian    
+//  Perez Benitez Damian    2183034588
 //  Carbajal Urquisa Luis Fhernando
 
 #include "refrigerador.h"
@@ -9,7 +9,7 @@
 Producto *agregar_Producto (int TIPO){
     Producto *aux = (Producto*)malloc(sizeof(Producto));
     int option = 0, bandera = 1;
-    switch (TIPO){
+    switch (TIPO){              //Segun el apartado del menú que escogió el usuario, será el tipo de producto
         case 1:
             strcpy(aux->tipoAlimento,"Bebida");
             break;
@@ -77,7 +77,7 @@ Producto *agregar_Producto (int TIPO){
 }
 
 
-Producto *agregar_Producto_temporal(float elemento){
+Producto *agregar_Producto_temporal(float elemento){        //Nos permite generar un apartado donde solo tengamos el precio del producto
     Producto *aux = (Producto*)malloc(sizeof(Producto));
     aux->precio = elemento;
     return (aux);
@@ -195,7 +195,7 @@ Nodo *buscar_Elemento_Recursivo (ListaSimple *lista, int inferior, int superior,
             aux = lista->cabeza;
             while (aux->identificador != central){
                 aux = aux->sig;
-            }
+            }   //aux->datos->precio = a[central]
             if (aux->datos->precio == elemento->datos->precio){
                 printf("\nSe encontro  un producto con precio %f",aux->datos->precio);
                 elemento->datos = aux->datos;
@@ -253,12 +253,12 @@ void QuickSort (ListaSimple *lista, int primero, int ultimo){
     int i, j, central;
     float pivote;
     central = (primero + ultimo)/2;
-    pivote = Identificador(lista,central)->datos->precio;
+    pivote = Identificador(lista,central)->datos->precio; // pivote = a[central]
     i = primero;
     j = ultimo;
     do{
-        while(Identificador(lista,j)->datos->precio < pivote){i++;}
-        while(Identificador(lista,j)->datos->precio > pivote){j--;}
+        while(Identificador(lista,j)->datos->precio < pivote){i++;}  //a[j] < pivote
+        while(Identificador(lista,j)->datos->precio > pivote){j--;}  //a[j] > pivote
         if(i <= j){
             Intercambiar(Identificador(lista,i),Identificador(lista,j));
             i++;
@@ -279,11 +279,12 @@ void *ordenamiento_seleccion(ListaSimple *lista, int n){
     for(i=0; i<n-1; i++){
         indiceMenor = i;
         for(j=i+1; j<n; j++){
-            if(Identificador(lista,j)->datos->precio < Identificador(lista,indiceMenor)->datos->precio){
+            if(Identificador(lista,j)->datos->precio < Identificador(lista,indiceMenor)->datos->precio){ //a[j] < a[indiceMenor]
                 indiceMenor = j;
             } 
+        }if (i != indiceMenor){
+            Intercambiar(Identificador(lista,i),Identificador(lista,indiceMenor));
         }
-        Intercambiar(Identificador(lista,i),Identificador(lista,indiceMenor));
     }
 }
 
@@ -300,5 +301,59 @@ Nodo* Identificador(ListaSimple *lista, int identificador){
         aux = aux->sig;
     }
     return (aux);
+}
+int eliminar_producto(ListaSimple *lista, int n){
+    float pre = 0;
+    Nodo *auxL;
+    Nodo *anterior;
+    int cont = 0;
+    auxL = lista->cabeza;
+    printf("Ingresa el precio a buscar: ");
+    scanf("%f",&pre);
+    while(auxL->datos->precio != pre){
+        auxL = auxL->sig;
+    }
+        if(lista->cabeza == auxL){
+            quitar_cabeza(lista);
+        }
+        else{
+            anterior = lista->cabeza;
+            while (anterior->sig != auxL){
+                anterior = anterior->sig;
+            }
+            if (anterior->sig == NULL){
+                quitar_cola(lista,anterior);
+            }
+            else{
+                anterior->sig = auxL->sig;
+                free(auxL);
+            }
+        }
+        cont++;
+    return cont;    
+}
+void acomodar_Id(ListaSimple *lista, int n){
+    Nodo *cabeza = lista -> cabeza;
+    Nodo *recorrido = lista -> cabeza;
+    for(int i = 0;i<n;i++){
+        recorrido->identificador = i;
+        recorrido = recorrido->sig;
+
+    }
+}
+
+//Funcion para archivo
+void llenar_txt(FILE *p, ListaSimple *lista){
+    Nodo *aux = lista->cabeza;
+    Producto *producto;
+    while (aux != NULL){
+        producto = aux->datos;
+        if(producto->disponibilidad == 0){
+            fprintf(p,"\nNombre: %s",producto->nombreAlimento);
+            fprintf(p,"\nPrecio: %.2f",producto->precio);
+        }
+        aux = aux->sig;
+    }
+
 }
 
