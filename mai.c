@@ -1,5 +1,15 @@
-//  Perez Benitez Damian    
+//  Perez Benitez Damian    2183034588
 //  Carbajal Urquisa Luis Fhernando
+
+//Comentarios adicionales
+//  Profesora, por más que intentamos, no pudimos generar ningun tipo de ordenamientos
+//  tenemos las funciones en el archivo .c, pero no supimos cual era el error.
+//  El programa funciona correctamente. Solo que en caso de querer usar el apartado busqueda
+//  se deben ingresar los productos de menor a mayor, ya que usamos una busqueda recursiva
+    
+//  Además como extra, incluimos la generación de un archivo txt, el cual genera un archivo
+//  de nombre Lista_De_Compras en el cual indica los productos con los que ya no cuenta el 
+//  refrigerador (Que tienen disponibilidad 0
 
 #include "refrigerador.h"
 #include <stdio.h>
@@ -55,6 +65,8 @@ int main (){
                             idBebida++;
                             break;
                         case 2:
+                            idBebida = idBebida - eliminar_producto(bebida,idBebida);
+                            acomodar_Id(bebida,idBebida);
                             break;
                         case 3:
                             imprimir_Lista(bebida);
@@ -110,6 +122,8 @@ int main (){
                             idEmbutido++;
                             break;
                         case 2:
+                            idEmbutido = idEmbutido - eliminar_producto(embutido,idEmbutido);
+                            acomodar_Id(embutido,idEmbutido);                        
                             break;
                         case 3:
                             imprimir_Lista(embutido);
@@ -131,7 +145,7 @@ int main (){
                             }
                             break;
                         case 5:
-                            //ordenamiento_seleccion(embutido, idEmbutido);
+                            ordenamiento_seleccion(embutido, idEmbutido);
                             break;
                         case 6:
                             vaciar_Lista(embutido);
@@ -165,6 +179,8 @@ int main (){
                             idFruta++;
                             break;
                         case 2:
+                            idFruta = idFruta - eliminar_producto(fruta,idFruta);
+                            acomodar_Id(fruta,idFruta);
                             break;
                         case 3:
                             imprimir_Lista(fruta);
@@ -220,6 +236,8 @@ int main (){
                             idLacteo++;
                             break;
                         case 2:
+                            idLacteo = idLacteo - eliminar_producto(lacteo,idLacteo);
+                            acomodar_Id(lacteo,idLacteo);                        
                             break;
                         case 3:
                             imprimir_Lista(lacteo);
@@ -275,6 +293,8 @@ int main (){
                             idCarne++;
                             break;
                         case 2:
+                            idCarne = idCarne - eliminar_producto(carne,idCarne);
+                            acomodar_Id(carne,idCarne);
                             break;
                         case 3:
                             imprimir_Lista(carne);
@@ -330,6 +350,8 @@ int main (){
                             idVerdura++;
                             break;
                         case 2:
+                            idVerdura = idVerdura - eliminar_producto(verdura,idVerdura);
+                            acomodar_Id(verdura,idVerdura);
                             break;
                         case 3:
                             imprimir_Lista(verdura);
@@ -374,6 +396,28 @@ int main (){
                 break;
         }
     }
+    //N
+    FILE *p;
+    p= fopen("Lista_De_Compras.txt","wt");
+    if(p==NULL){
+        printf("No se pudo crear el archivo");
+    }
+    else{
+        printf("\nGenerando lista de compras");
+        fprintf(p,"\n\nBebidas\n");
+        llenar_txt(p,bebida);
+        fprintf(p,"\n\nEmbutidos\n");
+        llenar_txt(p,embutido);
+        fprintf(p,"\n\nFrutas\n");
+        llenar_txt(p,fruta);
+        fprintf(p,"\n\nLacteos\n");
+        llenar_txt(p,lacteo);
+        fprintf(p,"\n\nProteinas\n");
+        llenar_txt(p,carne);
+        fprintf(p,"\n\nVerduras\n");
+        llenar_txt(p,verdura);
+    }
+    fclose(p);    
     //Se liberan todas las listas antes de terminar el programa
     vaciar_Lista(bebida);
     vaciar_Lista(embutido);
